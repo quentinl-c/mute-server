@@ -73,7 +73,7 @@ fs.readFile('mute.conf', 'utf8', function (err,data) {
     PORT_DB = process.env.OPENSHIFT_MONGODB_PORT || 27017;
 
     console.log('HOST_DB:')
-    
+
     var dbOptions = null;
     if (USERNAME_DB) {
       dbOptions = {
@@ -90,12 +90,12 @@ fs.readFile('mute.conf', 'utf8', function (err,data) {
     db.once('open', function callback () {
         console.log('Connection to mongoDB instance succeed!');
     });
-	
+
     HOST_SIGNALING = process.env.SIGNALING_SERVER_HOST || 'localhost';
     PORT_SIGNALING = process.env.SIGNALING_SERVER_PORT || 8000;
 	URI_SIGNALING = 'ws://'  + HOST_SIGNALING + ':' + PORT_SIGNALING;
 
-    console.log('Signaling server URI to be used: ' + URI_SIGNALING);	
+    console.log('Signaling server URI to be used: ' + URI_SIGNALING);
 });
 
 var docSchema = mongoose.Schema({
@@ -128,7 +128,7 @@ app.set('views', __dirname + '/views');
 var server_session_id = createID();
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 80;
 
 
 var delay = 0;
