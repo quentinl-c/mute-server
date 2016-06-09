@@ -65,7 +65,6 @@ fs.readFile('mute.conf', 'utf8', function (err,data) {
             pass: PASS_MAIL
         }
     });
-
     NAME_DB = obj.db.name;
     USERNAME_DB = obj.db.username;
     PASS_DB = obj.db.pass;
