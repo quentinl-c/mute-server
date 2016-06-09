@@ -1,0 +1,268 @@
+<!doctype html>
+<!-- <html lang="en" manifest="mute.manifest"> -->
+<html lang="en">
+	<head>
+		<% include head %>
+		<% include css %>
+	</head>
+	<body>
+		<% include menu %>
+		<div class="container">
+            <div class="row">
+            	<div class="col-md-12"> <!-- Main content -->
+            		<div class="row"> <!-- Demo -->
+            			<h1>
+                            <strong>Try MUTE, the Multi-User Text Editor</strong>
+                            <span class="pull-right">
+                                <button id="btnEditorMode" class="btn btn-default"></button>
+                                <button id="btnConnexionManager" class="btn btn-default"></button>
+                                <div id="divConnexionManagerToken"></div>
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div id="divWarningMessage" class="col-md-6 col-md-offset-1"></div>
+            <div class="col-md-2 pull-right">
+                <button id="btnPanelController" class="btn btn-default" style="margin-right: 30px;" onclick="hideCollaboratorsList();">
+                    <span id="panelControllerIcon" class="glyphicon glyphicon-arrow-right"></span>
+                    <span id="panelControllerLabel">Hide list</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10" id="divMain" style="padding-right: 0px;">
+                <% include editor %>
+            </div>
+            <div class="col-md-2" id="divInfosSup" style="padding-top: 15px; padding-left:0px; padding-right: 30px;">
+                <div class="panel-group">
+                    <div class="panel panel-default" style="border: 0px; box-shadow: 0 0px 0px;">
+                        <div class="panel-heading" style="border: 1px solid #ddd">
+                            <h4 class="panel-title">
+                                <span class="glyphicon glyphicon-th-list" style="margin-right: 10px;"></span>
+                                <strong>Collaborators</strong>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <ul class="list-group" style="margin-bottom: 0px;">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <input type="text" maxlength="20" class="form-control" style="width: 80%; display: inline; margin-left: 10px;" id="inputUsername" placeholder="Enter username">
+                                </li>
+                            </ul>
+                            <ul id="list-collaborators" class="list-group">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> <!-- Main content -->
+            		<div class="row"> <!-- Additionnal informations -->
+            			<div class="col-md-4">
+            				<h1><strong>What's MUTE ?</strong></h1>
+                            <p class="lead"><strong>MUTE</strong>, which stands for <strong>M</strong>ulti-<strong>U</strong>ser <strong>T</strong>ext <strong>E</strong>ditor, is a open-source Javascript library able to change any textarea into real-time collaborative text editors.</p>
+                            <p>Unlike others collaborative text editor, <strong>MUTE</strong> doesn't use an <a target="_blank" href="http://en.wikipedia.org/wiki/Operational_transformation">Operational Transform-based algorithm</a> to resolve conflicts and merge modifications, but works using a <a target="_blank" href="#">Conflict-free Replicated Data Types-based implementation</a>. This allows <strong>MUTE</strong> to <strong>manage effectively large text operations</strong> and to <strong>adopt a high scalable architecture</strong></p>
+                            <p>This demo works using <a target="_blank" href="http://ace.c9.io/#nav=about">Ace</a> as text editor and implement a centralized network architecture. If you want to implement another text editor or network architecture, you can extend <strong>MUTE</strong> by developping your own modules. If you're interested in it, <a href="guide">look at the guide</a>.</p>
+            			</div>
+            			<div class="col-md-4">
+            				<% include form-private-doc %>
+            			</div>
+            			<div class="col-md-4">
+            				<% include code %>
+            			</div>
+            		</div> <!-- End additionnal informations -->
+            	</div> <!-- End main content -->
+          	</div>
+            <hr>
+            <% include footer %>
+        </div>
+        <div class="modal fade" id="modalCloseTab" tabindex="-1" role="dialog" aria-labelledby="modalCloseTabLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modalCloseTabLabel">Open in a new tab</h4>
+                    </div>
+                    <div id="modal-body" class="modal-body">
+                        <p class="lead">
+                            This document has been opened in another tab/window. In order to avoid some mischievous bugs, you can no longer edit this document using this tab/window. Please go back to your documents list.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Dismiss pop-up
+                        </button>
+                        <a href="/list" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-list"></span>
+                            Documents list
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<% include scripts %>
+        <% include scripts-editor %>
+        <% include script-dbjs %>
+        <% include notifications %>
+        <script src="/assets/js/awareness-modules/remote-indicators.js"></script>
+        <script src="/assets/js/awareness-modules/collaborators-list.js"></script>
+        <script src="/assets/js/awareness-modules/username.js"></script>
+        <script src="/assets/js/awareness-modules/hoverlink.js"></script>
+        <script src="/assets/js/check-version.js"></script>
+		<script src="/assets/js/connexion-manager.js"></script>
+        <script src="/assets/js/editor-mode-manager.js"></script>
+        <script>
+			"use strict";
+
+            var HoverLink;
+            var timeoutUpdateUsername = null;
+            var serverDB;
+            var coordinator;
+            var editor;
+            var network;
+            var awareness;
+            var version = 0;
+            var infosUsersModule;
+
+            var online = false;
+            var posting;
+            
+            $(function () {
+                posting = $.post('/ajax/testConnection');
+                posting.done(function (data) {
+                    online = true;
+                });
+                posting.always(function () {
+                    openDB()
+                    .done(function (s) {
+                        console.log('On passe ici ?');
+                        serverDB = s
+                        initPage();
+                    });
+                });
+            });
+
+            function initPage () {
+                var currentState = 0;
+                var str = '';
+                var client;
+
+                console.log('Online:', online);
+
+                hljs.initHighlightingOnLoad();
+                currentState = 0;
+                str = '';
+
+                coordinator = new Mute.Coordinator('<%= docID %>', serverDB);
+                editor = new Mute.AceEditorAdapter('<%= editorID %>', coordinator);
+                HoverLink = require("hoverlink").HoverLink;
+                editor.hoverLink = new HoverLink(editor.editor);
+                
+                coordinator.setEditor(editor);
+                if(online === true) {
+                    network = new Mute.SocketIOAdapter(coordinator);
+                    infosUsersModule = new Mute.InfosUsersModule('<%= docID %>', coordinator, editor, network, null, serverDB);
+                    editor.setInfosUsersModule(infosUsersModule);
+                    network.setInfosUsersModule(infosUsersModule);
+                    $('#inputUsername').usernameModule({
+                        infosUsersModule: infosUsersModule
+                    });
+                    $('#list-collaborators').collaboratorsListModule({
+                        infosUsersModule: infosUsersModule,
+                        listCSSClasses: ['mute-collaborator-indicator-0', 'mute-collaborator-indicator-1', 'mute-collaborator-indicator-2']
+                    });
+                    $().remoteIndicatorsModule({ 
+                        infosUsersModule: infosUsersModule,
+                        textEditorAdapter: editor,
+                        networkAdapter: network,
+                        cursorsCSSClasses: ['mute-remote-cursor-0', 'mute-remote-cursor-1', 'mute-remote-cursor-2'],
+                        selectionsCSSClasses: ['mute-remote-selection-0', 'mute-remote-selection-1', 'mute-remote-selection-2']
+                    });
+                    $('#divWarningMessage').checkVersionModule({
+                        /*
+                        *   options : {
+                        *       docID
+                        *       coordinator
+                        *       serverDB
+                        *       timeInterval
+                        *       toDisabled: list of item which will be switched to disabled
+                        *       toReadOnly: list of item which will be switched to read only
+                        *   }
+                        */
+                        docID: '<%= docID %>',
+                        coordinator: coordinator,
+                        serverDB: serverDB,
+                        timeInterval: 3000,
+                        toDisabled: []
+                    });
+                    $('#btnConnexionManager').connexionManagerModule({
+                        /*
+                        *   options : {
+                        *       coordinator
+                        *       network
+                        *       token
+                        *   }
+                        */
+                        coordinator: coordinator,
+                        network: network,
+                        token: $('#divConnexionManagerToken')
+                    });
+                    coordinator.setNetwork(network);
+                }
+                $('#btnEditorMode').editorModeManagerModule({
+                    /*
+                    *   options : {
+                    *       coordinator
+                    *       textEditorAdapter
+                    *       token
+                    *   }
+                    */
+                    coordinator: coordinator,
+                    textEditorAdapter: editor,
+                    token: $('#divWarningMessage')
+                });
+                coordinator.init();
+                console.log('<%= docID %>');
+            }
+
+            function showCollaboratorsList() {
+                $('#divMain').animate({ width: '83,33%' });
+                $('#divInfosSup').animate({ width: '16,67%' }).show();
+                setTimeout(function () { 
+                    if(editor !== null && editor !== undefined) {
+                        editor.editor.resize();   
+                    }
+                    $('#panelControllerLabel').html('Hide list');
+                    $('#panelControllerIcon').removeClass('glyphicon-arrow-left').addClass('glyphicon-arrow-right');
+                    $('#btnPanelController').attr('onclick', 'hideCollaboratorsList()');
+                }, 0);
+
+            }
+
+            function hideCollaboratorsList() {
+                $('#divInfosSup').animate({ width: '0%'}).hide();
+                $('#divMain').animate({ width: '100%'});
+                setTimeout(function () {
+                    if(editor !== null && editor !== undefined) {
+                        editor.editor.resize();   
+                    }
+                    $('#panelControllerLabel').html('Show list');
+                    $('#panelControllerIcon').removeClass('glyphicon-arrow-right').addClass('glyphicon-arrow-left');
+                    $('#btnPanelController').attr('onclick', 'showCollaboratorsList()');
+                }, 400);
+            }
+        </script>
+        <% include script-download-app %>
+	</body>
+</html>
