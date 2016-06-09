@@ -128,7 +128,7 @@ app.set('views', __dirname + '/views');
 var server_session_id = createID();
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-var port = process.env.OPENSHIFT_NODEJS_PORT || 80;
+var port = 80;
 
 
 var delay = 0;
