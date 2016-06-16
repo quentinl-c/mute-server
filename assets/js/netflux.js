@@ -1607,7 +1607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param  {Object} [options] - This service options.
 	   * @param  {Object} [options.signaling='wws://sigver-coastteam.rhcloud.com:8000'] -
 	   * Signaling server URL.
-	   * @param  {Object[]} [options.iceServers=[{urls: 'stun:23.21.150.121'},{urls: 'stun:stun.l.google.com:19302'},{urls: 'turn:numb.viagenie.ca', credential: 'webrtcdemo', username: 'louis%40mozilla.com'}]] - WebRTC options to setup which STUN
+	   * @param  {Object[]} [options.iceServers=[{urls: 'stun:23.21.150.121'},{urls: 'stun:stun.l.google.com:19302'},{urls: 'turn:numb.viagenie.ca', credential: 'netflux54', username: 'gerald.oster%40loria.fr'}]] - WebRTC options to setup which STUN
 	   * and TURN servers to be used.
 	   */
 
