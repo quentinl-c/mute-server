@@ -1620,7 +1620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    _this2.defaults = {
 	      signaling: 'wws://sigver-coastteam.rhcloud.com:8000',
-	      iceServers: [{ urls: 'stun:23.21.150.121' }, { urls: 'stun:stun.l.google.com:19302' }, { urls: 'turn:numb.viagenie.ca', credential: 'netflux54', username: 'gerald.oster%40loria.fr' }]
+	      iceServers: [{ urls: 'stun:23.21.150.121' }, { urls: 'stun:stun.l.google.com:19302' }, { urls: 'turn:numb.viagenie.ca', credential: 'netflux54', username: 'gerald.oster@loria.fr' }]
 	    };
 	    _this2.settings = Object.assign({}, _this2.defaults, options);
 
