@@ -9,7 +9,7 @@
 	url = https://github.com/ajaxorg/ace-builds.git
 [submodule "assets/js/mute-client"]
 	path = assets/js/mute-client
-	url = https://github.com/coast-team/mute-client.git
+	url = https://github.com/quentinl-c/mute-client.git
 	branch = netflux
 [submodule "node_modules/mute-server"]
 	path = node_modules/mute-server
