@@ -1,5 +1,6 @@
 ### TODO: Présentation du module
 
+<<<<<<< HEAD
 #Installation
 >Require :
 * node
@@ -45,12 +46,53 @@ node app.js
 
 * [**mute-client**](https://github.com/MatthieuNICOLAS/mute-client)
 * [**mute-server**](https://github.com/MatthieuNICOLAS/mute-server)
+=======
+# Installation
+
+```
+npm install mute-server
+```
+
+If you want to use the socketIOAdapter provided in this module, you will need to install **socket.io** too:
+
+```
+npm install socket.io
+```
+
+# Utilisation
+
+**In your app.js file:**
+
+```
+var server = require('http').createServer(app),
+var Coordinator = require('mute-server').Coordinator,
+var SocketIOAdapter = require('mute-server').SocketIOAdapter;
+
+var coordinator = new Coordinator();
+var socketIOAdapter = new SocketIOAdapter(server, coordinator);
+coordinator.setNetwork(socketIOAdapter);
+```
+
+### Network
+
+The network architecture provided consist in an **central server** communicating with clients using WebSockets, using **socket.io**, and broadcasting the modifications made by users to the others.
+If you don't want to use **socket.io**, you can easily **implement your own network architecture**, as long as you respect the **name of the events and the data structure** used to communicate between the **coordinator and the network adapter**.
+
+# See also
+
+* [**mute-demo**](https://github.com/MatthieuNICOLAS/mute-demo)
+* [**mute-client**](https://github.com/MatthieuNICOLAS/mute-client)
+>>>>>>> 3651615baf95505b96c74a08a67d35ed49efe99e
 * [**mute-structs**](https://github.com/MatthieuNICOLAS/mute-structs)
 * [**mute-utils**](https://github.com/MatthieuNICOLAS/mute-utils)
 
 ## License
 
+<<<<<<< HEAD
 **mute-demo** is licensed under the GNU General Public License 3.
+=======
+**mute-server** is licensed under the GNU General Public License 3.
+>>>>>>> 3651615baf95505b96c74a08a67d35ed49efe99e
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -66,4 +108,8 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 
 The documentation, tutorial and source code are intended as a community
 resource and you can basically use, copy and improve them however you want.
+<<<<<<< HEAD
 Included works are subject to their respective licenses.
+=======
+Included works are subject to their respective licenses.
+>>>>>>> 3651615baf95505b96c74a08a67d35ed49efe99e

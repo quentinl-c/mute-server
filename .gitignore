@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 node_modules/
 assets/js/mute-client/node_modules/
 .openshift
 mute.conf
+=======
+# Dependency directory
+# Commenting this out is preferred by some people, see
+# https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
+node_modules
+>>>>>>> 3651615baf95505b96c74a08a67d35ed49efe99e
